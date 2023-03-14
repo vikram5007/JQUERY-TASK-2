@@ -1,37 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+  <!-- DIALOG BOX JQUERY LINKS -->
+
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/mint-choc/jquery-ui.css"
          rel = "stylesheet">
       <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
       <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <title>Document</title>
+  
+  <title>Document</title>
+
+  <style>
+    #sub{
+      margin-left:90px;
+      margin-top:25px;
+    }
+
+    #opener{
+      position: absolute;
+    top:10px;
+    right:10px;
+    }
+
+    .ui-menu {
+      margin-top:10PX;
+            width: 200px;
+            height:650px;
+         }
+  </style>
 </head>
 
 <script>
-      var url='channels4_profile.jpg';
-    $(document).ready(function(){
-        
+  var url = 'channels4_profile.jpg';
+  $(document).ready(function () {
+
     $(`<img src='${url}' height=100px width=100px>`).appendTo('#logo');
 
     $("#sub").button(function () {
-      document.write="hello";
-    })
-}
-    );
-
+      $("#sub").onclick(function () {
+        document.write("HELLO THERE ");
+      });
+    });
+  });
 
 
 </script>
+
 <body>
-    <div id="logo"></div>
-    <button id="sub"> SUBSCRIBE </button>
+  <div id="logo"></div>
+
+  <!-- JQUERY DIALOG BOX -->
+  <script>
+  $( function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+    $('#sub').on('click',function(){
+      $( "#dialog" ).dialog( "close" );
+    })
+  } );
+  </script>
+
+   <script>
+    
+     $(function() {
+        $( "#menu-1" ).menu({
+           icons: { submenu: "ui-icon-circle-triangle-e"},
+           position: { my: "right top", at: "right-200 top+5" } 
+        });
+        
+     });
+  </script>
+</head>
+<body>
+ 
+<div id="dialog" title="Basic dialog">
+  <label>EMAIL : </label>
+  <input type="email" id="email">
+  <button id="sub">SUBSCRIBE</button>
+</div>
+
+<button id="opener">SUBSCRIBE </button>
+
+<ul id = "menu-1">
+  <li><a href =>HOME</a></li>
+  <li><a href = >ORDERS</a></li>
+  <li><a href = >TRACKING</a>
+     <ul>
+        <li><a href = >PACKAGES</a></li>
+        <li><a href = >ESTIMATED DELIVERY</a></li>
+        <li><a href = >RAISE A QUERY </a></li>
+     </ul>
+  </li>
+  <li><a href = >ABOUT US </a></li>
+  <li><a href = >HELP</a></li>
+</ul>
+
+
 
 
 
 </body>
+
 </html>
