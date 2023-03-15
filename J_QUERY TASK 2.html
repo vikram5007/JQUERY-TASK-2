@@ -33,10 +33,19 @@
     }
 
     .ui-menu {
-      margin-top:10PX;
-            width: 200px;
-            height:650px;
-         }
+    margin-top:10PX;
+    width: 200px;
+    height:650px;
+  }
+
+   #tabs{
+    position: absolute;
+    top:130px;
+    left:250px;
+   width:900px;
+   
+   }
+  
   </style>
 </head>
 
@@ -46,13 +55,8 @@
 
     $(`<img src='${url}' height=100px width=100px>`).appendTo('#logo');
 
-    $("#sub").button(function () {
-      $("#sub").onclick(function () {
-        document.write("HELLO THERE ");
-      });
+  
     });
-  });
-
 
 </script>
 
@@ -62,7 +66,7 @@
   <!-- JQUERY DIALOG BOX -->
   <script>
   $( function() {
-    $( "#dialog" ).dialog({
+    $( "#dialogbox" ).dialog({
       autoOpen: false,
       show: {
         effect: "blind",
@@ -75,10 +79,10 @@
     });
  
     $( "#opener" ).on( "click", function() {
-      $( "#dialog" ).dialog( "open" );
+      $( "#dialogbox" ).dialog( "open" );
     });
     $('#sub').on('click',function(){
-      $( "#dialog" ).dialog( "close" );
+      $( "#dialogbox" ).dialog( "close" );
     })
   } );
   </script>
@@ -96,7 +100,7 @@
 </head>
 <body>
  
-<div id="dialog" title="Basic dialog">
+<div id="dialogbox" title="Basic dialog">
   <label>EMAIL : </label>
   <input type="email" id="email">
   <button id="sub">SUBSCRIBE</button>
@@ -118,8 +122,349 @@
   <li><a href = >HELP</a></li>
 </ul>
 
+<script>
+   $( function() {
+    $( "#tabs" ).tabs();
+  } );
+</script>
+
+<script>
+$( function() {
+  var progressTimer,
+    progressbar = $( "#progressbar" ),
+    progressLabel = $( ".progress-label" ),
+    dialogButtons = [{
+      text: "Cancel Download",
+      click: closeDownload
+    }],
+    dialog = $( "#dialog" ).dialog({
+      autoOpen: false,
+      closeOnEscape: false,
+      resizable: false,
+      buttons: dialogButtons,
+      open: function() {
+        progressTimer = setTimeout( progress, 2000 );
+      },
+      beforeClose: function() {
+        downloadButton.button( "option", {
+          disabled: false,
+          label: "Start Download"
+        });
+      }
+    }),
+    downloadButton = $( "#downloadButton" )
+      .button()
+      .on( "click", function() {
+        $( this ).button( "option", {
+          disabled: true,
+          label: "Downloading..."
+        });
+        dialog.dialog( "open" );
+      });
+
+  progressbar.progressbar({
+    value: false,
+    change: function() {
+      progressLabel.text( "Current Progress: " + progressbar.progressbar( "value" ) + "%" );
+    },
+    complete: function() {
+      progressLabel.text( "Complete!" );
+      dialog.dialog( "option", "buttons", [{
+        text: "Close",
+        click: closeDownload
+      }]);
+      $(".ui-dialog button").last().trigger( "focus" );
+    }
+  });
+
+  function progress() {
+    var val = progressbar.progressbar( "value" ) || 0;
+
+    progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+
+    if ( val <= 99 ) {
+      progressTimer = setTimeout( progress, 50 );
+    }
+  }
+
+  function closeDownload() {
+    clearTimeout( progressTimer );
+    dialog
+      .dialog( "option", "buttons", dialogButtons )
+      .dialog( "close" );
+    progressbar.progressbar( "value", false );
+    progressLabel
+      .text( "Starting download..." );
+    downloadButton.trigger( "focus" );
+  }
+} );
 
 
+</script>
+
+<script>
+  $( function() {
+    var progressTimer,
+      progressbar = $( "#progressbar1" ),
+      progressLabel = $( ".progress-label" ),
+      dialogButtons = [{
+        text: "Cancel Download",
+        click: closeDownload
+      }],
+      dialog = $( "#dialog1" ).dialog({
+        autoOpen: false,
+        closeOnEscape: false,
+        resizable: false,
+        buttons: dialogButtons,
+        open: function() {
+          progressTimer = setTimeout( progress, 2000 );
+        },
+        beforeClose: function() {
+          downloadButton.button( "option", {
+            disabled: false,
+            label: "Start Download"
+          });
+        }
+      }),
+      downloadButton = $( "#downloadButton1" )
+        .button()
+        .on( "click", function() {
+          $( this ).button( "option", {
+            disabled: true,
+            label: "Downloading..."
+          });
+          dialog.dialog( "open" );
+        });
+  
+    progressbar.progressbar({
+      value: false,
+      change: function() {
+        progressLabel.text( "Current Progress: " + progressbar.progressbar( "value" ) + "%" );
+      },
+      complete: function() {
+        progressLabel.text( "Complete!" );
+        dialog.dialog( "option", "buttons", [{
+          text: "Close",
+          click: closeDownload
+        }]);
+        $(".ui-dialog button").last().trigger( "focus" );
+      }
+    });
+  
+    function progress() {
+      var val = progressbar.progressbar( "value" ) || 0;
+  
+      progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+  
+      if ( val <= 99 ) {
+        progressTimer = setTimeout( progress, 50 );
+      }
+    }
+  
+    function closeDownload() {
+      clearTimeout( progressTimer );
+      dialog
+        .dialog( "option", "buttons", dialogButtons )
+        .dialog( "close" );
+      progressbar.progressbar( "value", false );
+      progressLabel
+        .text( "Starting download..." );
+      downloadButton.trigger( "focus" );
+    }
+  } );
+
+  </script>
+
+<script>
+$( function() {
+ $( "#tabs" ).tabs();
+} );
+</script>
+<script>
+$( function() {
+var progressTimer,
+ progressbar = $( "#progressbar" ),
+ progressLabel = $( ".progress-label" ),
+ dialogButtons = [{
+   text: "Cancel Download",
+   click: closeDownload
+ }],
+ dialog = $( "#dialog" ).dialog({
+   autoOpen: false,
+   closeOnEscape: false,
+   resizable: false,
+   buttons: dialogButtons,
+   open: function() {
+     progressTimer = setTimeout( progress, 2000 );
+   },
+   beforeClose: function() {
+     downloadButton.button( "option", {
+       disabled: false,
+       label: "Start Download"
+     });
+   }
+ }),
+ downloadButton = $( "#downloadButton" )
+   .button()
+   .on( "click", function() {
+     $( this ).button( "option", {
+       disabled: true,
+       label: "Downloading..."
+     });
+     dialog.dialog( "open" );
+   });
+
+progressbar.progressbar({
+ value: false,
+ change: function() {
+   progressLabel.text( "Current Progress: " + progressbar.progressbar( "value" ) + "%" );
+ },
+ complete: function() {
+   progressLabel.text( "Complete!" );
+   dialog.dialog( "option", "buttons", [{
+     text: "Close",
+     click: closeDownload
+   }]);
+   $(".ui-dialog button").last().trigger( "focus" );
+ }
+});
+
+function progress() {
+ var val = progressbar.progressbar( "value" ) || 0;
+
+ progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+
+ if ( val <= 99 ) {
+   progressTimer = setTimeout( progress, 50 );
+ }
+}
+
+function closeDownload() {
+ clearTimeout( progressTimer );
+ dialog
+   .dialog( "option", "buttons", dialogButtons )
+   .dialog( "close" );
+ progressbar.progressbar( "value", false );
+ progressLabel
+   .text( "Starting download..." );
+ downloadButton.trigger( "focus" );
+}
+} );
+
+
+</script>
+
+<script>
+$( function() {
+ var progressTimer,
+   progressbar = $( "#progressbar2" ),
+   progressLabel = $( ".progress-label" ),
+   dialogButtons = [{
+     text: "Cancel Download",
+     click: closeDownload
+   }],
+   dialog = $( "#dialog2" ).dialog({
+     autoOpen: false,
+     closeOnEscape: false,
+     resizable: false,
+     buttons: dialogButtons,
+     open: function() {
+       progressTimer = setTimeout( progress, 2000 );
+     },
+     beforeClose: function() {
+       downloadButton.button( "option", {
+         disabled: false,
+         label: "Start Download"
+       });
+     }
+   }),
+   downloadButton = $( "#downloadButton2" )
+     .button()
+     .on( "click", function() {
+       $( this ).button( "option", {
+         disabled: true,
+         label: "Downloading..."
+       });
+       dialog.dialog( "open" );
+     });
+
+ progressbar.progressbar({
+   value: false,
+   change: function() {
+     progressLabel.text( "Current Progress: " + progressbar.progressbar( "value" ) + "%" );
+   },
+   complete: function() {
+     progressLabel.text( "Complete!" );
+     dialog.dialog( "option", "buttons", [{
+       text: "Close",
+       click: closeDownload
+     }]);
+     $(".ui-dialog button").last().trigger( "focus" );
+   }
+ });
+
+ function progress() {
+   var val = progressbar.progressbar( "value" ) || 0;
+
+   progressbar.progressbar( "value", val + Math.floor( Math.random() * 3 ) );
+
+   if ( val <= 99 ) {
+     progressTimer = setTimeout( progress, 50 );
+   }
+ }
+
+ function closeDownload() {
+   clearTimeout( progressTimer );
+   dialog
+     .dialog( "option", "buttons", dialogButtons )
+     .dialog( "close" );
+   progressbar.progressbar( "value", false );
+   progressLabel
+     .text( "Starting download..." );
+   downloadButton.trigger( "focus" );
+ }
+} );
+
+</script>
+
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">CARS </a></li>
+    <li><a href="#tabs-2">MOBILE</a></li>
+    <li><a href="#tabs-3">BIKES </a></li>
+  </ul>
+  <div id="tabs-1">
+   <img src="marek-pospisil-oUBjd22gF6w-unsplash.jpg" height="400px" width="300px">
+  
+   <div id="dialog" title="File Download">
+    <div class="progress-label">Starting download...</div>
+    <div id="progressbar"></div>
+  </div>
+  <button id="downloadButton"><img src="pngwing.com.png" height="50px"width="50px"></button>
+  </div>
+
+
+  <div id="tabs-2">
+    <img src="rahul-chakraborty-xsGxhtAsfSA-unsplash.jpg" height="640px" width="640px">
+    <div id="dialog1" title="File Download">
+      <div class="progress-label">Starting download...</div>
+      <div id="progressbar1"></div>
+    </div>
+    <button id="downloadButton1"><img src="pngwing.com.png" height="50px"width="50px"></button>
+    </div>
+
+
+  <div id="tabs-3">
+    <img src="max-itin-7GeprSfVqLQ-unsplash.jpg" height="600px" width="400px">
+    <div id="dialog2" title="File Download">
+      <div class="progress-label">Starting download...</div>
+      <div id="progressbar2"></div>
+    </div>
+    <button id="downloadButton2"><img src="pngwing.com.png" height="50px"width="50px"></button>
+    </div>
+
+
+   </div>
 
 
 </body>
